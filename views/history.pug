@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Game History
+    link(rel="stylesheet" href="/css/history.css")
+
+  body
+    .bubbles
+      each i in [1,2,3,4,5,6,7,8,9,10]
+        .bubble(style=`--i:${i};`)
+
+    .center-container
+      .content-box
+        h1.game-title Game History
+        
+        if history.length === 0
+          p.no-history No games played yet
+        else
+          each game, index in history
+            a.history-item(
+              href=`/history/${game.partyCode}`
+              class=index < 3 ? `podium-${index + 1}` : ''
+            )
+              .party-code= game.partyCode
+              .player-name= game.playerName
+              .player-score= `${game.final_score} pts`
+              .game-date= game.game_date.toLocaleString()
+
+        button.btn(onclick="window.location.href='/menu'") Back to Menu

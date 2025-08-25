@@ -1,0 +1,71 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Python Quiz Adventure
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
+    link(rel="stylesheet" href="/css/menu.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js")
+    
+  body
+    .bubbles
+      - for (let i = 1; i <= 10; i++)
+        .bubble(style=`--i:${i};`)
+    
+    .top-bar
+      a.how-to-play-link(href="#") How To Play?
+      a.logout-btn(href="/logout")
+        i.fas.fa-sign-out-alt
+        span Logout
+    
+    .center-container
+      .logo-wrapper 
+        img.logo(src="/img/logo.png" alt="Logo")
+      .content-box
+        h1 Python Quiz Adventure
+        .welcome-banner
+          p Welcome, #{playerName}!
+        
+        .action-buttons
+          .row
+            a.btn#new-game New Game
+            a.btn#join-party Join Party
+          a.btn(style="margin-top:15px" href="/history") View History
+
+    .modal-overlay#how-to-play-modal
+      .modal-content
+        h2 How To Play
+        button.modal-close &times;
+        .game-instructions
+          h3 Game Rules:
+          ol
+            li Create a new game and invite your friends.
+            li Click on Start Game button to start the game.
+            li Roll the physical dice and check whether you landed on a QR Code box.
+            li Use the QR Code Scanner to scan and answer the question.
+            li If you answer correctly, you will be given 10 points.
+            li The first player to reach 200 points won.
+          h3 Point Boost:
+          ul
+            li If you answer correctly in 3 times in a row, you will get 20 point on the next correct answer.
+            li If you answer correctly in 5 times in a row, you will get 30 point on the next correct answer.
+
+    script(src="/js/menu.js")
+    script.
+      window.addEventListener('load', async () => {
+        try {
+          const res = await fetch('/check-active-session');
+          const data = await res.json();
+
+          if (data.hasSession) {
+            const rejoin = confirm('You were in an ongoing game. Do you want to rejoin it?');
+            if (rejoin) {
+              window.location.href = `/start?partyCode=${data.partyCode}`;
+            }
+          }
+        } catch (err) {
+          console.error('Failed to check session', err);
+        }
+      });

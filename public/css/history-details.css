@@ -1,0 +1,210 @@
+body {
+  background: radial-gradient(circle, #111d5e, #0a0f40);
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.bubbles {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: float 20s infinite ease-in;
+  opacity: 0.5;
+  filter: blur(4px);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-1000px) translateX(calc(var(--i) * 20px - 100px)) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 80px 20px 20px;
+  box-sizing: border-box;
+}
+
+.content-box {
+  background-color: rgba(17, 29, 94, 0.7);
+  padding: 100px 40px 40px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+img.logo {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  animation: floatLogo 4s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10;
+}
+
+@keyframes floatLogo {
+  0%, 100% {
+    transform: translateX(-50%) translateY(-50%);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-60%);
+  }
+}
+
+img.logo:hover {
+  transform: translateX(-50%) translateY(-50%) scale(1.1);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
+}
+
+h1.game-title {
+  font-size: 3rem;
+  margin: 0 0 20px 0;
+  color: #ffd700;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+h2, h3 {
+  color: #fff;
+  margin: 10px 0;
+}
+
+.scoreboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 30px auto;
+  width: 100%;
+  max-width: 500px;
+}
+
+.score-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.player-name {
+  flex: 1;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+.player-name i.fas.fa-crown {
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.player-score {
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.score-entry.podium-1 {
+  background: linear-gradient(90deg, rgb(255, 217, 2), rgba(255,255,255,0.1));
+  border-left: 5px solid #ffd700;
+  animation: goldGlow 2s infinite;
+}
+
+.score-entry.podium-2 {
+  background: linear-gradient(90deg, rgb(192, 192, 192), rgba(255,255,255,0.1));
+  border-left: 5px solid #c0c0c0;
+}
+
+.score-entry.podium-3 {
+  background: linear-gradient(90deg, rgba(216, 137, 57, 0.897), rgba(255,255,255,0.1));
+  border-left: 5px solid #cd7f32;
+}
+
+@keyframes goldGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(255,215,0,0.3); }
+  50% { box-shadow: 0 0 20px rgba(255,215,0,0.6); }
+}
+
+.btn {
+  background-color: #ffd700;
+  color: #111d5e;
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  align-self: center;
+}
+
+.btn:hover {
+  background-color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .content-box {
+    padding: 80px 20px 30px;
+  }
+  
+  h1.game-title {
+    font-size: 2.2rem;
+  }
+  
+  .score-entry {
+    padding: 12px 15px;
+  }
+  
+  .player-name, .player-score {
+    font-size: 1rem;
+  }
+}

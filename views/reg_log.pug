@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=850, user-scalable=yes")
+    title Register and Log In
+    link(rel="stylesheet", href="/css/reg_log.css")
+    script(src="/js/reg_log.js")
+
+  body
+    if messages && messages.sessionExpired
+      .error-message Session expired. Please log in again.
+    if messages && messages.logout === 'success'
+      .success-message You have been logged out successfully.
+    
+  .container
+    if error
+      .error-message= error
+    .form-box.login
+      form(action="/login", method="POST")
+        h1 Log In
+        .input-box
+          input(type="text", name="username", placeholder="Username", required, value=formData && formData.username || '')
+        .input-box
+          input(type="password", name="password", placeholder="Password", required)
+        button.btn(type="submit") Log In
+
+    .form-box.register
+      form(action="/register", method="POST")
+        h1 Register
+        .input-box
+          input(type="text", name="username", placeholder="Username", required, value=formData && formData.username || '')
+        .input-box
+          input(type="text", name="playerName", placeholder="Player Name", required, value=formData && formData.playerName || '')
+        .input-box
+          input(type="password", name="password", placeholder="Password", required)
+        button.btn(type="submit") Register
+
+    .toggle-box
+      .toggle-panel.toggle-left
+        h1 Welcome back!
+        p Don't have an account?
+        button.btn.register-btn(type="button") Register
+      .toggle-panel.toggle-right
+        h1 Welcome!
+        p Already have an account?
+        button.btn.login-btn(type="button") Login

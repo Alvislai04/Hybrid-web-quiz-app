@@ -1,0 +1,59 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Join Party - Python Quiz Adventure
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
+    link(rel="stylesheet" href="/css/menu.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js")
+
+  body
+    .bubbles
+      - for (let i = 1; i <= 10; i++)
+        .bubble(style=`--i:${i};`)
+
+    .top-bar
+      a.how-to-play-link(href="#") How To Play?
+      a.back-btn(href="/menu")
+        i.fas.fa-arrow-left
+        span Back
+
+    .center-container
+      .logo-wrapper 
+        img.logo(src="/img/logo.png" alt="Logo")
+      .content-box
+        h1 Join a Party
+        .welcome-banner
+          p Ready to join the Python adventure?
+
+        .action-buttons
+          .row
+            button.btn#enter-code Enter Party Code
+            button.btn#scan-qr Scan Party QR
+
+        #qrScanner(style="display: none;")
+          video#videoElement(width="300", height="300")
+
+    // Modal for How To Play
+    .modal-overlay#how-to-play-modal
+      .modal-content
+        h2 How To Play
+        button.modal-close &times;
+        .game-instructions
+          h3 Game Rules:
+          ol
+            li Create a new game and invite your friends.
+            li Click on Start Game button to start the game.
+            li Roll the physical dice and check whether you landed on a QR Code box.
+            li Use the QR Code Scanner to scan and answer the question.
+            li If you answer correctly, you will be given 10 points.
+            li The first player to reach 200 points won.
+          h3 Point Boost:
+          ul
+            li If you answer correctly in 3 times in a row, you will get 20 point on the next correct answer.
+            li If you answer correctly in 5 times in a row, you will get 30 point on the next correct answer.
+
+    script(src="/js/joinParty.js")

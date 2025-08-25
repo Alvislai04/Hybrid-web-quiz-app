@@ -1,0 +1,67 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Waiting Lobby
+    link(rel="stylesheet" href="/css/lobby.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js")
+
+  body
+    .top-bar
+      a.how-to-play-link(href="#") How To Play?
+
+    .bubbles
+      each i in [1,2,3,4,5,6,7,8,9,10]
+        .bubble(style=`--i:${i};`)
+
+    .center-container
+      .content-box
+        h1 Waiting Lobby...
+        p Welcome, #{playerName}! Share this code with your friends to join the game:
+        .party-code
+          span.party-code-text Party Code:
+          span.party-code-value= partyCode
+        if qrCodeDataUrl
+          .qr-section
+            p Scan this QR code to join:
+            img.qr-img(src=qrCodeDataUrl, alt="Join QR Code", style="width:180px;")
+        p Waiting for players to join...
+        
+        ul#player-list(data-partycode=partyCode)
+
+        if isHost
+          .action-row(style="display:flex; gap:15px; justify-content:center; margin-top:20px;")
+            form(action="/delete-party", method="POST", style="display:inline;")
+              input(type="hidden", name="partyCode", value=partyCode)
+              button(type="submit" class="btn delete-btn" id="delete-party-btn") Delete Party
+            a.btn.start-btn#start-btn(href=`/start?partyCode=${partyCode}&isHost=true`) Start Game
+        else
+          .action-row(style="display:flex; gap:15px; justify-content:center; margin-top:20px;")
+            form(action="/leave-party", method="POST")
+              input(type="hidden", name="userID", value=userID)
+              input(type="hidden", name="partyCode", value=partyCode)
+              button(type="submit" class="btn leave-party" id="leave-party-btn") Leave Party
+            button.btn.start-btn(disabled) Start Game (Host Only)
+
+    // Modal for How To Play
+    .modal-overlay#how-to-play-modal
+      .modal-content
+        h2 How To Play
+        button.modal-close &times;
+        .game-instructions
+          h3 Game Rules:
+          ol
+            li Create a new game and invite your friends.
+            li Click on Start Game button to start the game.
+            li Roll the physical dice and check whether you landed on a QR Code box.
+            li Use the QR Code Scanner to scan and answer the question.
+            li If you answer correctly, you will be given 10 points.
+            li The first player to reach 200 points won.
+          h3 Point Boost:
+          ul
+            li If you answer correctly in 3 times in a row, you will get 20 point on the next correct answer.
+            li If you answer correctly in 5 times in a row, you will get 30 point on the next correct answer.
+
+    script(src="/js/lobby.js")

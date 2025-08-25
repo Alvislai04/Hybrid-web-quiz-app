@@ -1,0 +1,123 @@
+.content-box {
+  transition: all 0.5s ease;
+}
+
+.content-box form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.content-box form label {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  color: #fff;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.content-box form label:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.content-box form input[type="radio"] {
+  margin-right: 12px;
+  transform: scale(1.2);
+}
+
+.content-box button.btn {
+  margin-top: 20px;
+  background-color: #ffd700;
+  color: #111d5e;
+  border: none;
+  padding: 14px 26px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.content-box button.btn:hover {
+  background-color: #ffffff;
+  color: #111d5e;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.content-box h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #ffd700;
+  justify-content: center;
+}
+
+.content-box p {
+  font-size: 1.2rem;
+  color: #ffffffdd;
+  margin-bottom: 25px;
+}
+
+.bubble {
+  filter: blur(4px);
+  opacity: 0.4;
+}
+
+form .options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.submit-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+@media (max-width: 500px) {
+  .submit-wrapper .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.redirect-spinner {
+  border: 6px solid #ffd700;
+  border-top: 6px solid #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fade-out {
+  animation: fadeOut 1s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.correct-answer-text {
+  color: #ffd700;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  display: block;
+}

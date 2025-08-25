@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Game Details - #{partyCode}
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
+    link(rel="stylesheet", href="/css/history-details.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js")
+
+  body
+    .bubbles
+      each i in [1,2,3,4,5,6,7,8,9,10]
+        .bubble(style=`--i:${i};`)
+
+    .center-container
+      .content-box
+        img.logo(src="/img/logo.png" alt="Logo")
+        h1.game-title Game Results
+        h2 Party: #{partyCode}
+        h3= gameDate.toLocaleString()
+        
+        ul.scoreboard-list
+          each player, index in players
+            li.score-entry(class=index < 3 ? 'podium-'+(index+1) : '')
+              span.player-name
+                if index === 0
+                  i.fas.fa-crown
+                | #{player.playerName}
+              span.player-score #{player.score} pts
+
+        a.btn(href="/history") Back to History
+
+  script.
+    $(document).ready(function() {
+      if (window.confetti) {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+    });

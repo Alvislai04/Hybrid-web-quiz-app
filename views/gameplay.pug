@@ -1,0 +1,60 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Game Play
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
+    link(rel="stylesheet", href="/css/gameplay.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js")
+    script(src="https://unpkg.com/html5-qrcode@latest/html5-qrcode.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js")
+    script(src="/js/gameplay.js")
+
+  body
+    .bubbles
+      each i in [1,2,3,4,5,6,7,8,9,10]
+        .bubble(style=`--i:${i};`)
+
+    .top-bar
+      a.how-to-play-link(href="#") How To Play?
+
+    .center-container
+      .content-box
+        img.logo(src="/img/logo.png" alt="Logo")
+
+        h1.game-title Python Quiz Adventure
+        
+        h2 Good Luck, #{playerName}!
+
+        h3 = = Scoreboard = =
+        ul#scoreboard-list(data-partycode=partyCode)
+          li Loading...
+
+        p Use this QR Code Scanner if you land on a square with QR Code
+        .qr-container
+          #reader(style="width: 100%")
+          button.btn(onclick="startScanner()") Scan QR Code
+
+    // Modal
+    .modal-overlay#how-to-play-modal
+      .modal-content
+        button.modal-close &times;
+        .game-instructions
+          h2 How To Play
+          h3 Game Rules:
+          ol
+            li Create a new game and invite your friends.
+            li Click on Start Game button to start the game.
+            li Roll the physical dice and check whether you landed on a QR Code box.
+            li Use the QR Code Scanner to scan and answer the question.
+            li If you answer correctly, you will be given 10 points.
+            li The first player to reach 200 points won.
+          h3 Point Boost:
+          ul
+            li If you answer correctly in 3 times in a row, you will get 20 point on the next correct answer.
+            li If you answer correctly in 5 times in a row, you will get 30 point on the next correct answer.
+            
+  script.
+    window.partyCode = '!{partyCode}';

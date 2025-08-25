@@ -1,0 +1,50 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Python Quiz
+    link(rel="stylesheet", href="/css/lobby.css")
+    link(rel="stylesheet", href="/css/card.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js")
+    script(src="/js/card.js")
+    script(src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js")
+    audio#success-sound(src="/audio/Correct.mp3" preload="auto")
+    audio#error-sound(src="/audio/Wrong.mp3" preload="auto")
+    script.
+      window.partyCode = '!{partyCode}';
+
+  body
+    .bubbles
+      each i in [1,2,3,4,5,6,7,8,9,10]
+        .bubble(style=`--i:${i};`)
+
+    .center-container
+      .content-box
+        h2 Python Quiz
+        p= question.question_text
+
+        form(id="quiz-form")
+          .options
+            label
+              input(type="radio", name="answer", value="A")
+              | A) #{question.option_a}
+            label
+              input(type="radio", name="answer", value="B")
+              | B) #{question.option_b}
+            label
+              input(type="radio", name="answer", value="C")
+              | C) #{question.option_c}
+            label
+              input(type="radio", name="answer", value="D")
+              | D) #{question.option_d}
+          
+          .submit-wrapper
+            button(type="submit" class="btn") Submit Answer
+        
+        #result-message
+  
+  script.
+    const cardId = '!{cardId}';
+    const partyCode = '!{partyCode}';
+    const playerID = '!{playerID}';
